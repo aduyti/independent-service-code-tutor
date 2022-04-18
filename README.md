@@ -6,4 +6,4 @@
 ## App Features
 - 
 ### Frameworks & Libraries
-  `React`, `firebase`, `react-router`, `react-firebase-hooks`, `react-bootstrap`
+  `React`, `firebase`, `react-router`, `react-firebase-hooks`, `react-bootstrap`, `heroicons`
