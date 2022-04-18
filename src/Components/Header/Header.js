@@ -5,7 +5,7 @@ import CustomNavLink from '../CustomNavLink/CustomNavLink';
 
 const Header = () => {
     return (
-        <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
+        <Navbar collapseOnSelect expand="md" bg="light" variant="light">
             <Container>
                 <Navbar.Brand as={Link} to="/" className="fw-bold fs-3">CODE TUTOR</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />

@@ -1,23 +1,23 @@
 [
     {
         "id": "s0001",
-        "name": "Beginner Lerner",
+        "name": "Beginner Coder",
         "price": 4.99,
         "image":"https://raw.githubusercontent.com/aduyti/my-test-images/main/service-images/beginner.png",
-        "description":["",""]
+        "description":["Getting Started with Coding", "C++, Python or JavaScript", "Basic Data Structure", "I/O operations", "Duration 3 weeks"]
     },
     {
         "id": "s0002",
-        "name": "Intermediate Lerner",
+        "name": "Intermediate Coder",
         "price": 14.99,
         "image":"https://raw.githubusercontent.com/aduyti/my-test-images/main/service-images/intermediate.png",
-        "description":["",""]
+        "description":["Algorithms & Data Structures", "Object Oriented Programing", "File I/O", "Exception Handling", "Duration 2 months"]
     },
     {
         "id": "s0003",
-        "name": "Advanced Lerner",
+        "name": "Advanced Coder",
         "price": 29.99,
         "image":"https://raw.githubusercontent.com/aduyti/my-test-images/main/service-images/advance.png",
-        "description":["",""]
+        "description":["UI operations", "React or Django", "Database & Hosting", "Authentication & Authorization", "Duration 4 months"]
     }
 ]
