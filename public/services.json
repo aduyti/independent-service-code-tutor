@@ -1,0 +1,23 @@
+[
+    {
+        "id": "s0001",
+        "name": "Beginner Lerner",
+        "price": 4.99,
+        "image":"https://raw.githubusercontent.com/aduyti/my-test-images/main/service-images/beginner.png",
+        "description":["",""]
+    },
+    {
+        "id": "s0002",
+        "name": "Intermediate Lerner",
+        "price": 14.99,
+        "image":"https://raw.githubusercontent.com/aduyti/my-test-images/main/service-images/intermediate.png",
+        "description":["",""]
+    },
+    {
+        "id": "s0003",
+        "name": "Advanced Lerner",
+        "price": 29.99,
+        "image":"https://raw.githubusercontent.com/aduyti/my-test-images/main/service-images/advance.png",
+        "description":["",""]
+    }
+]
