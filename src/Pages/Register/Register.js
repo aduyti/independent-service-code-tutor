@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init'
 import Loading from '../../Components/Loading/Loading';
 import ThirdPartyLogin from '../../Components/ThirdPartyLogin/ThirdPartyLogin';
@@ -17,10 +17,13 @@ const Register = () => {
         user,
         loading,
         error,
-    ] = useCreateUserWithEmailAndPassword(auth);
-    const checkRegister = data => {
-        const { registerEmail, registerPassword } = data;
-        createUserWithEmailAndPassword(registerEmail, registerPassword);
+    ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+    const [updateProfile, updating, updateProfileError] = useUpdateProfile(auth);
+    const checkRegister = async data => {
+        const { name, registerEmail, registerPassword } = data;
+        await createUserWithEmailAndPassword(registerEmail, registerPassword);
+
+        await updateProfile({ displayName: name });
     }
     let from = location.state?.from?.pathname || "/";
     if (user) {
@@ -29,12 +32,12 @@ const Register = () => {
     return (
         <div className="container text-start">
             <h1 className="text-primary text-center">Register</h1>
-            {loading && <Loading />}
-            {error && <p className="text-center text-danger">{error.message}</p>}
+            {(loading || updating) && <Loading />}
+            {(error || updateProfileError) && <p className="text-center text-danger">{error.message || updateProfileError.message}</p>}
             <Form className="w-50 mx-auto" onSubmit={handleSubmit(checkRegister)}>
                 <Form.Group className="mb-3" controlId="formBasicName">
                     <Form.Label>Name</Form.Label>
-                    <Form.Control type="text" placeholder="Enter Your Name" {...register("registerName")} />
+                    <Form.Control type="text" placeholder="Enter Your Name" {...register("name")} />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>

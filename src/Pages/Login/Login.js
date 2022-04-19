@@ -1,11 +1,14 @@
 import React from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../../Components/Loading/Loading';
 import ThirdPartyLogin from '../../Components/ThirdPartyLogin/ThirdPartyLogin';
 import auth from '../../firebase.init';
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -18,14 +21,25 @@ const Login = () => {
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
+    const [sendPasswordResetEmail, sending, passwordEmailError] = useSendPasswordResetEmail(
+        auth
+    );
+    // const [updatePassword, updating, updatePasswordError] = useUpdatePassword(auth);
     const checkLogin = data => {
         const { loginEmail, loginPassword } = data;
         signInWithEmailAndPassword(loginEmail, loginPassword)
     }
-    const forgotPasswordClick = event => {
-        console.log("fgp");
+    const forgotPasswordClick = async () => {
+        const email = document.getElementById("email").value;
+        console.log(/\S+@\S+\.\S+/.test(email));
+        if (/\S+@\S+\.\S+/.test(email)) {
+            await sendPasswordResetEmail(email);
+            toast('To Reset Password Check your email.');
+        }
+        else {
+            toast('Please Enter your email')
+        }
     }
-
     let from = location.state?.from?.pathname || "/";
     if (user) {
         navigate(from, { replace: true });
@@ -34,12 +48,12 @@ const Login = () => {
     return (
         <div className="container text-start">
             <h1 className="text-primary text-center">Login</h1>
-            {loading && <Loading />}
-            {error && <p className="text-center text-danger">{error.message}</p>}
+            {(loading || sending) && <Loading />}
+            {(error || passwordEmailError) && <p className="text-center text-danger">{error.message || passwordEmailError.message}</p>}
             <Form className="w-50 mx-auto" onSubmit={handleSubmit(checkLogin)}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email"
+                    <Form.Control id="email" type="email" placeholder="Enter email"
                         {...register("loginEmail",
                             { required: true, pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ })} />
                     {errors.loginEmail?.type === "pattern" && (<p className="text-danger">Enter a valid email</p>)}
@@ -60,6 +74,7 @@ const Login = () => {
             <p className="text-center">New Here? <Link to="/register" className="text-decoration-none">Please Register</Link></p>
 
             <ThirdPartyLogin>Login</ThirdPartyLogin>
+            <ToastContainer />
         </div>
     );
 };
