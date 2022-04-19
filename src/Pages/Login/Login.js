@@ -36,7 +36,7 @@ const Login = () => {
                 </Button>
             </Form>
             <Button variant="link" type="" className="d-block mx-auto text-decoration-none" onClick={forgotPasswordClick} >Forgot your password?</Button>
-            <p className="text-center">New Here? <Link to="/register" className="text-decoration-none">Please register</Link></p>
+            <p className="text-center">New Here? <Link to="/register" className="text-decoration-none">Please Register</Link></p>
         </div>
     );
 };

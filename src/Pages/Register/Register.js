@@ -6,13 +6,20 @@ import { Link } from 'react-router-dom';
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const checkRegister = data => {
-        const { registerEmail, registerPassword } = data;
-        console.log(registerEmail, registerPassword);
+        const { registerName, registerEmail, registerPassword } = data;
+        console.log(registerName, registerEmail, registerPassword);
     }
     return (
         <div className="container text-start">
             <h1 className="text-primary text-center">Register</h1>
             <Form className="w-50 mx-auto" onSubmit={handleSubmit(checkRegister)}>
+                <Form.Group className="mb-3" controlId="formBasicName">
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control type="text" placeholder="Enter Your Name"
+                        {...register("registerName",
+                            { required: true })} />
+                    {errors.registerName?.type === "required" && (<p className="text-danger">User Name required</p>)}
+                </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control type="email" placeholder="Enter email"
