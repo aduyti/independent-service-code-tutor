@@ -1,12 +1,16 @@
 import React from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const checkLogin = (data) => {
+    const checkLogin = data => {
         const { loginEmail, loginPassword } = data;
         console.log(loginEmail, loginPassword);
+    }
+    const forgotPasswordClick = event => {
+        console.log("fgp");
     }
     return (
         <div className="container text-start">
@@ -27,11 +31,12 @@ const Login = () => {
                             { required: true })} />
                     {errors.loginPassword?.type === "required" && (<p className="text-danger">Password required</p>)}
                 </Form.Group>
-                <Button variant="primary" type="submit">
-                    Submit
+                <Button variant="primary" type="submit" className="w-100">
+                    Login
                 </Button>
             </Form>
-            <a className="text-decoration-none" href="#">Forgot your password?</a>
+            <Button variant="link" type="" className="d-block mx-auto text-decoration-none" onClick={forgotPasswordClick} >Forgot your password?</Button>
+            <p className="text-center">New Here? <Link to="/register" className="text-decoration-none">Please register</Link></p>
         </div>
     );
 };
