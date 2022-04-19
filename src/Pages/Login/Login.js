@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useAuthState, useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../../Components/Loading/Loading';
@@ -11,6 +11,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
+    const [oldUser, userLoading] = useAuthState(auth);
+
     const navigate = useNavigate();
     let location = useLocation();
 
@@ -30,8 +32,7 @@ const Login = () => {
         signInWithEmailAndPassword(loginEmail, loginPassword)
     }
     const forgotPasswordClick = async () => {
-        const email = document.getElementById("email").value;
-        console.log(/\S+@\S+\.\S+/.test(email));
+        const email = document.getElementsByClassName("email")[0].value;
         if (/\S+@\S+\.\S+/.test(email)) {
             await sendPasswordResetEmail(email);
             toast('To Reset Password Check your email.');
@@ -41,7 +42,10 @@ const Login = () => {
         }
     }
     let from = location.state?.from?.pathname || "/";
-    if (user) {
+    if (userLoading) {
+        return <Loading />;
+    }
+    if (user || oldUser) {
         navigate(from, { replace: true });
     }
 
@@ -53,7 +57,7 @@ const Login = () => {
             <Form className="w-50 mx-auto" onSubmit={handleSubmit(checkLogin)}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control id="email" type="email" placeholder="Enter email"
+                    <Form.Control type="email" placeholder="Enter email" className="email"
                         {...register("loginEmail",
                             { required: true, pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ })} />
                     {errors.loginEmail?.type === "pattern" && (<p className="text-danger">Enter a valid email</p>)}

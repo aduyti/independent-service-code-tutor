@@ -2,21 +2,21 @@ import React from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useAuthState, useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init'
 import Loading from '../../Components/Loading/Loading';
 import ThirdPartyLogin from '../../Components/ThirdPartyLogin/ThirdPartyLogin';
 
 const Register = () => {
+    const [user, loading] = useAuthState(auth);
     const navigate = useNavigate();
     let location = useLocation();
-
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [
         createUserWithEmailAndPassword,
-        user,
-        loading,
-        error,
+        createUser,
+        createUserLoading,
+        createUserError,
     ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
     const [updateProfile, updating, updateProfileError] = useUpdateProfile(auth);
     const checkRegister = async data => {
@@ -26,14 +26,17 @@ const Register = () => {
         await updateProfile({ displayName: name });
     }
     let from = location.state?.from?.pathname || "/";
-    if (user) {
+    if (loading) {
+        return <Loading />;
+    }
+    if (createUser || user) {
         navigate(from, { replace: true });
     }
     return (
         <div className="container text-start">
             <h1 className="text-primary text-center">Register</h1>
-            {(loading || updating) && <Loading />}
-            {(error || updateProfileError) && <p className="text-center text-danger">{error.message || updateProfileError.message}</p>}
+            {(createUserLoading || updating) && <Loading />}
+            {(createUserError || updateProfileError) && <p className="text-center text-danger">{createUserError.message || updateProfileError.message}</p>}
             <Form className="w-50 mx-auto" onSubmit={handleSubmit(checkRegister)}>
                 <Form.Group className="mb-3" controlId="formBasicName">
                     <Form.Label>Name</Form.Label>
