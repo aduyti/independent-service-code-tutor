@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import CustomNavLink from '../CustomNavLink/CustomNavLink';
+import CustomNavLink from '../../Utilities/CustomNavLink/CustomNavLink';
 
 const Header = () => {
     return (

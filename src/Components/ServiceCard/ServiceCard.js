@@ -25,7 +25,7 @@ const ServiceCard = ({ service }) => {
                 </Card.Body>
                 <Card.Footer className="d-flex justify-content-between align-items-center">
                     <strong className="text-primary">${price}</strong>
-                    <Button variant="primary" onClick={() => navigate(`checkout/${id}`)}>Buy Now</Button>
+                    <Button variant="primary" onClick={() => navigate(`checkout/${id}`)}>Book Now</Button>
                 </Card.Footer>
             </Card>
         </Col>
