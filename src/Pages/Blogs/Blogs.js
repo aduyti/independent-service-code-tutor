@@ -1,35 +1,34 @@
 import React from 'react';
-import { Accordion } from 'react-bootstrap';
 
 const Blogs = () => {
     return (
-        <div className="container my-3">
-            <Accordion defaultActiveKey="0">
-                <Accordion.Item eventKey="0">
-                    <Accordion.Header>Accordion Item #1</Accordion.Header>
-                    <Accordion.Body>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-                        est laborum.
-                    </Accordion.Body>
-                </Accordion.Item>
-                <Accordion.Item eventKey="1">
-                    <Accordion.Header>Accordion Item #2</Accordion.Header>
-                    <Accordion.Body>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-                        est laborum.
-                    </Accordion.Body>
-                </Accordion.Item>
-            </Accordion>        </div>
+        <div className="container mx-auto p-3">
+            <div className="border border-3 rounded border-primary w-75 mx-auto p-3 my-3">
+                <h3>Difference between authorization and authentication</h3>
+                <p>Authentication is about validating persons credentials like User Name, User ID and password to verify their identity.While authorization is the process of granting permission to access a person in some particular places. Authentication means confirming users own identity, while authorization means granting access to the specified space. Authentication is the process of verifying person, authorization is the process of verifying the accessibility of the person.</p>
+            </div>
+            <div className="border border-3 rounded border-primary w-75 mx-auto p-3 my-3">
+                <h3>Why are you using firebase? What other options do you have to implement authentication?</h3>
+                <p>Firebase provides user a secure and easy access to database, authentication, hosting and so on. using firebase user can do authentication and access database through the client side code.
+                    <br />
+                    there are quite a few options available alternative to firebase. Such as : Auth0, Okta, Amazon congnito, backendless, keycloak .
+                </p>
+            </div>
+            <div className="border border-3 rounded border-primary w-75 mx-auto p-3 my-3">
+                <h3>What other services does firebase provide other than authentication</h3>
+                <p>Cloud Firestore,
+                    Cloud Functions,
+                    Hosting,
+                    Cloud Storage,
+                    Google Analytics,
+                    Predictions,
+                    Cloud Messaging,
+                    Dynamic Links,
+                    Remote Config
+                </p>
+            </div>
+
+        </div>
     );
 };
 

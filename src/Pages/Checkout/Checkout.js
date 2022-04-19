@@ -5,8 +5,9 @@ import { useNavigate } from 'react-router-dom';
 const Checkout = () => {
     const navigate = useNavigate();
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
+        alert("Thank You for Booking My Course")
         navigate('/');
     }
     return (
@@ -16,15 +17,15 @@ const Checkout = () => {
             <Form className="w-50 mx-auto" onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Your Name</Form.Label>
-                    <Form.Control type="email" placeholder="Your Name" />
+                    <Form.Control type="text" placeholder="Your Name" required />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                     <Form.Label>Your textarea</Form.Label>
-                    <Form.Control as="textarea" rows={3} />
+                    <Form.Control as="textarea" rows={3} required />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea2">
                     <Form.Label>Your Extensions</Form.Label>
-                    <Form.Control as="textarea" rows={3} />
+                    <Form.Control as="textarea" rows={3} required />
                 </Form.Group>
                 <Button variant="primary" type="submit" className="w-100">
                     Submit
