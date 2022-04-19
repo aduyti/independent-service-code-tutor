@@ -1,24 +1,36 @@
 import React from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init'
+import Loading from '../../Components/Loading/Loading';
 
 const Register = () => {
+    const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const [
+        createUserWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useCreateUserWithEmailAndPassword(auth);
     const checkRegister = data => {
-        const { registerName, registerEmail, registerPassword } = data;
-        console.log(registerName, registerEmail, registerPassword);
+        const { registerEmail, registerPassword } = data;
+        createUserWithEmailAndPassword(registerEmail, registerPassword);
+    }
+    if (user) {
+        navigate('/');
     }
     return (
         <div className="container text-start">
             <h1 className="text-primary text-center">Register</h1>
+            {loading && <Loading />}
+            {error && <p className="text-center text-danger">{error.message}</p>}
             <Form className="w-50 mx-auto" onSubmit={handleSubmit(checkRegister)}>
                 <Form.Group className="mb-3" controlId="formBasicName">
                     <Form.Label>Name</Form.Label>
-                    <Form.Control type="text" placeholder="Enter Your Name"
-                        {...register("registerName",
-                            { required: true })} />
-                    {errors.registerName?.type === "required" && (<p className="text-danger">User Name required</p>)}
+                    <Form.Control type="text" placeholder="Enter Your Name" {...register("registerName")} />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
