@@ -4,6 +4,7 @@ import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../../Components/Loading/Loading';
+import ThirdPartyLogin from '../../Components/ThirdPartyLogin/ThirdPartyLogin';
 import auth from '../../firebase.init';
 
 const Login = () => {
@@ -57,6 +58,8 @@ const Login = () => {
             </Form>
             <Button variant="link" type="" className="d-block mx-auto text-decoration-none" onClick={forgotPasswordClick} >Forgot your password?</Button>
             <p className="text-center">New Here? <Link to="/register" className="text-decoration-none">Please Register</Link></p>
+
+            <ThirdPartyLogin>Login</ThirdPartyLogin>
         </div>
     );
 };

@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init'
 import Loading from '../../Components/Loading/Loading';
+import ThirdPartyLogin from '../../Components/ThirdPartyLogin/ThirdPartyLogin';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -56,6 +57,8 @@ const Register = () => {
                 </Button>
             </Form>
             <p className="text-center">Already Registered? <Link to="/login" className="text-decoration-none">Please Login</Link></p>
+
+            <ThirdPartyLogin>Register</ThirdPartyLogin>
         </div >
     );
 };
