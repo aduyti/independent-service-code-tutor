@@ -2,12 +2,13 @@ import React from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../../Components/Loading/Loading';
 import auth from '../../firebase.init';
 
 const Login = () => {
     const navigate = useNavigate();
+    let location = useLocation();
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [
@@ -23,8 +24,10 @@ const Login = () => {
     const forgotPasswordClick = event => {
         console.log("fgp");
     }
+
+    let from = location.state?.from?.pathname || "/";
     if (user) {
-        navigate('/');
+        navigate(from, { replace: true });
     }
 
     return (

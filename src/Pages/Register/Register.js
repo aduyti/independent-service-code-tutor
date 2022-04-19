@@ -1,13 +1,15 @@
 import React from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init'
 import Loading from '../../Components/Loading/Loading';
 
 const Register = () => {
     const navigate = useNavigate();
+    let location = useLocation();
+
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [
         createUserWithEmailAndPassword,
@@ -19,8 +21,9 @@ const Register = () => {
         const { registerEmail, registerPassword } = data;
         createUserWithEmailAndPassword(registerEmail, registerPassword);
     }
+    let from = location.state?.from?.pathname || "/";
     if (user) {
-        navigate('/');
+        navigate(from, { replace: true });
     }
     return (
         <div className="container text-start">
