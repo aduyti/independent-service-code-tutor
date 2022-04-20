@@ -20,11 +20,11 @@ const Checkout = () => {
                     <Form.Control type="text" placeholder="Your Name" required />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                    <Form.Label>Your textarea</Form.Label>
+                    <Form.Label>Your Address</Form.Label>
                     <Form.Control as="textarea" rows={3} required />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea2">
-                    <Form.Label>Your Extensions</Form.Label>
+                    <Form.Label>Your Expectation From Me</Form.Label>
                     <Form.Control as="textarea" rows={3} required />
                 </Form.Group>
                 <Button variant="primary" type="submit" className="w-100">
